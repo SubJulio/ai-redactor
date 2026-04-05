@@ -195,11 +195,11 @@ async function analyzeTextWithLLM(
 
     return {
       original: text,
-      suggestions: analysis.suggestions || [], // Гарантируем массив
-      confidence: analysis.confidence || 0,
+      suggestions: (analysis.suggestions ?? []) as string[],
+      confidence: analysis.confidence ?? 0,
       improved: analysis.improved,
       issues_found: analysis.issues_found,
-    };
+    } as TextAnalysisResponse;
   } catch (error) {
     console.error('[Shadow Editor] LLM API error:', error);
     throw error;
