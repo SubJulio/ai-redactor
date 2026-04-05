@@ -1,29 +1,38 @@
 {
-  "name": "Теневой AI-редактор",
-  "version": "0.1.0",
-  "description": "AI-редактор текстов в реальном времени прямо на любой веб-странице",
   "manifest_version": 3,
+  "name": "Теневой AI-редактор",
+  "version": "0.2.0",
+  "description": "Невидимый помощник для улучшения текстов прямо в браузере",
   "permissions": [
-    "activeTab",
     "storage",
-    "scripting"
+    "activeTab"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "https://*/*"
   ],
   "background": {
-    "service_worker": "background.js",
+    "service_worker": "src/background/index.ts",
     "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "js": ["src/content/index.ts"],
+      "css": ["src/content/index.css"],
       "run_at": "document_idle"
     }
   ],
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "Теневой AI-редактор"
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   }
 }
