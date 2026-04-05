@@ -10,6 +10,7 @@ export default defineConfig({
       targets: [
         { src: 'manifest.json', dest: '.' },
         { src: 'public/icons', dest: '.' },
+        { src: 'public/popup.html', dest: '.' },
       ],
     }),
   ],
@@ -20,7 +21,7 @@ export default defineConfig({
       input: {
         background: resolve(__dirname, 'src/background/index.ts'),
         content: resolve(__dirname, 'src/content/index.ts'),
-        popup: resolve(__dirname, 'src/popup/index.html'),
+        popup: resolve(__dirname, 'src/popup/index.tsx'),
       },
       output: {
         entryFileNames: '[name].js',
