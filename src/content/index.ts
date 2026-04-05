@@ -14,7 +14,7 @@ interface TextAnalysis {
 }
 
 // Состояние
-let textElements: Map<Element, TextNodeObserver> = new Map();
+let textElements: Map<Element, TextFieldObserver> = new Map();
 let isOverlaysVisible = false;
 
 // Инициализация после загрузки DOM
@@ -37,7 +37,7 @@ function init(): void {
 // Наблюдатель за текстовыми полями
 class TextFieldObserver {
   private element: HTMLElement;
-  private originalPlaceholder?: string;
+  private originalPlaceholder?: string; // Используется в будущих версиях
   private observer: MutationObserver;
 
   constructor(element: HTMLElement) {
@@ -352,7 +352,7 @@ function createOverlayLayer(): void {
 // Обработчик сообщений от extension
 function handleMessages(
   message: any,
-  sender: chrome.runtime.MessageSender,
+  _sender: chrome.runtime.MessageSender,
   sendResponse: (response?: any) => void
 ): boolean | void {
   if (message.type === 'TOGGLE_OVERLAYS') {

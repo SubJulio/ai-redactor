@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
 import './index.module.css';
 
 interface Settings {
@@ -17,7 +16,7 @@ interface ApiKeyStatus {
   checking?: boolean;
 }
 
-function App() {
+export default function App() {
   const [settings, setSettings] = useState<Settings>({
     apiKey: '',
     apiUrl: 'https://llm.api.cloud.ru/v1',
@@ -210,6 +209,3 @@ function App() {
     </div>
   );
 }
-
-const root = createRoot(document.getElementById('root')!);
-root.render(<App />);

@@ -31,7 +31,7 @@ interface TextAnalysisRequest {
 interface TextAnalysisResponse {
   original: string;
   improved?: string;
-  suggestions: string[];
+  suggestions: string[]; // Обязательное поле
   confidence: number;
   issues_found?: string[];
 }
@@ -52,7 +52,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 /**
  * Message Handler
  */
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   console.log('[Shadow Editor] Received message:', message.type);
 
   switch (message.type) {
@@ -195,7 +195,10 @@ async function analyzeTextWithLLM(
 
     return {
       original: text,
-      ...analysis,
+      suggestions: analysis.suggestions || [], // Гарантируем массив
+      confidence: analysis.confidence || 0,
+      improved: analysis.improved,
+      issues_found: analysis.issues_found,
     };
   } catch (error) {
     console.error('[Shadow Editor] LLM API error:', error);
