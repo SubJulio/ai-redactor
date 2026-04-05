@@ -23,11 +23,19 @@ export default defineConfig({
         content: resolve(__dirname, 'src/content/index.ts'),
         popup: resolve(__dirname, 'src/popup/index.tsx'),
       },
-      output: {
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name][extname]',
-      },
+      output: [
+        // popup как IIFE (для Chrome extension popup)
+        {
+          entryFileNames: 'popup.js',
+          format: 'iife',
+          name: 'ShadowEditorPopup',
+        },
+        // background и content как ESM
+        {
+          entryFileNames: '[name].js',
+          format: 'es',
+        },
+      ],
     },
   },
   publicDir: 'public',
